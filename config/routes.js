@@ -72,14 +72,31 @@ async function register(request, response) {
     }
     catch(error) {
         response.status(401).json({
-            'error': error,
+            'error': error.message,
         });
     }
 }
 
 //-- Login Returning User ------------------------
-function login(request, response) {
+async function login(request, response) {
     // implement user login
+    try {
+        // Validate user
+        const username = prepUsername(request.body.username);
+        const rawPassword = request.body.password;
+        const user = await knexDB('users').where({'username': username}).first();
+        if(!user || !bcryptjs.compareSync(rawPassword, user['password'])) {
+            throw new Error('Credentials invalid: either username or password are incorrect');
+        }
+        // Create Token
+        const logInToken = logInUser(user);
+        response.status(200).json(logInToken);
+    }
+    catch(error) {
+        response.status(401).json({
+            'error': error.message,
+        });
+    }
 }
 
 //-- Get Jokes -----------------------------------
@@ -95,8 +112,5 @@ async function getJokes(request, response) {
             message: 'Error Fetching Jokes',
             error  : error,
         });
-    }
-    finally {
-        next();
     }
 }
