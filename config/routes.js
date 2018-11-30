@@ -8,6 +8,7 @@ const bcryptjs     = require('bcryptjs'    );
 const jsonWebToken = require('jsonwebtoken');
 const {authenticate} = require('./middlewares'          );
 const knexDB         = require('../database/dbConfig.js');
+const jwtKey         = require('../_secrets/keys').jwtKey;
 
 //-- Export Server Configuration Utility ---------
 module.exports = server => {
@@ -31,7 +32,7 @@ function logInUser(user) {
         id      : user.id      ,
         username: user.username,
     };
-    const secret = 'json token secret';
+    const secret = jwtKey;
     const options = {
         expiresIn: 1000*60*2, // 2 minutes
     };
