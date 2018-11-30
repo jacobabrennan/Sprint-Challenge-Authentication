@@ -34,7 +34,7 @@ function logInUser(user) {
     };
     const secret = jwtKey;
     const options = {
-        expiresIn: 1000*60*2, // 2 minutes
+        expiresIn: '1m',
     };
     return jsonWebToken.sign(tokenData, secret, options);
 }
@@ -104,7 +104,8 @@ async function login(request, response) {
 async function getJokes(request, response) {
     try {
         const result = await axios.get(
-            'https://08ad1pao69.execute-api.us-east-1.amazonaws.com/dev/random_ten'
+            'https://safe-falls-22549.herokuapp.com/random_ten',
+            //'https://08ad1pao69.execute-api.us-east-1.amazonaws.com/dev/random_ten'
         );
         response.status(200).json(result.data);
     }
