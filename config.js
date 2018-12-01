@@ -5,8 +5,8 @@
 module.exports = {
     // URLs
     URL_REGISTER: '/api/register',
-    URL_LOGIN   : '/api/login   ',
-    URL_JOKES   : '/api/jokes   ',
+    URL_LOGIN   : '/api/login'   ,
+    URL_JOKES   : '/api/jokes'   ,
     URL_API_JOKES    : 'https://safe-falls-22549.herokuapp.com/random_ten',
     URL_API_JOKES_OLD: 'https://08ad1pao69.execute-api.us-east-1.amazonaws.com/dev/random_ten',
     // Database

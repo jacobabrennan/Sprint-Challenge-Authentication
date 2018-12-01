@@ -1,5 +1,19 @@
 
 
+let shuffleTroll = (function () {
+    function trollCompare() {
+        return Math.random() - 1/2;
+    }
+    return function(originalArray) {
+        let shuffledArray = originalArray.slice();
+        shuffledArray.sort(trollCompare);
+        return shuffledArray;
+    }
+}());
+
+
+
+
 //==============================================================================
 
 //-- Dependencies --------------------------------
@@ -81,6 +95,7 @@ async function register(request, response) {
 
 //-- Login Returning User ------------------------
 async function login(request, response) {
+    console.log('hit')
     // implement user login
     try {
         // Validate user
